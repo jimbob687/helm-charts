@@ -59,12 +59,7 @@ spec:
           - -execute
           - CREATE USER $(INFLUX_USERNAME) WITH PASSWORD '$(INFLUX_PASSWORD)' WITH ALL PRIVILEGES
         resources:
-          requests:
-            cpu: 100m
-            memory: 20Mi
-          limits:
-            cpu: 100m
-            memory: 20Mi
+          {{- toYaml .Values.bootstrap.ddldml.resources | nindent 10 }}
       {{ end }}
       {{- if .Values.bootstrap.ddldml.configMap }}
       - name: ddl
@@ -149,10 +144,5 @@ spec:
         args:
           - "Bootstrap Success"
         resources:
-          requests:
-            cpu: 100m
-            memory: 20Mi
-          limits:
-            cpu: 100m
-            memory: 20Mi
+          {{- toYaml .Values.bootstrap.ddldml.resources | nindent 10 }}
 {{ end }}
